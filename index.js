@@ -9,7 +9,7 @@ const numbers = require('number-to-text');
 
 function TimeToText(time) {
     let parsedTime = time.split(':');
-    let result = null;
+    let result = '';
     let hour = null;
     let minute = null;
     let hourText = '';
@@ -32,11 +32,34 @@ function TimeToText(time) {
     }
 
     if (minute == null || hour == null) {
-        return null;//Incorrect date has been received.
+        return result;//Incorrect date has been received.
     }
 
     hourText = numbers(hour);
     minuteText = numbers(minute);
+
+    if (minute  > 0 && minute < 30) {
+
+    } else if (minute > 30) {
+
+    } else if (minute == 0) {
+
+        switch (hour) {
+            case 0:
+
+                break;
+            case 12:
+
+                break;
+            case 15:
+
+                break;
+            default:
+        }
+
+    } else if (minute == 30) {
+
+    }
 }
 
 module.exports = TimeToText;
