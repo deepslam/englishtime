@@ -14,6 +14,7 @@ function TimeToText(time) {
     let minute = null;
     let hourText = '';
     let minuteText = '';
+    let minuteName = '';
 
     if (
         typeof parsedTime[0] != "undefined" &&
@@ -38,7 +39,20 @@ function TimeToText(time) {
     hourText = numbers(hour);
     minuteText = numbers(minute);
 
-    if (minute  > 0 && minute < 30) {
+    if (minute %5 == 0 && minute != 0) {
+        switch (minute) {
+            case 15:
+
+                break;
+            case 30:
+
+                break;
+            case 45:
+
+                break;
+            default:
+        }
+    } else if (minute  > 0 && minute < 30) {
 
     } else if (minute > 30) {
 
