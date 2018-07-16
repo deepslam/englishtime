@@ -7,7 +7,7 @@
  */
 const numbers = require('number-to-text');
 
-function TimeToText(time) {
+const TimeToText = function(time) {
     let parsedTime = time.split(':');
     let result = '';
     let hour = null;
@@ -74,6 +74,8 @@ function TimeToText(time) {
     } else if (minute == 30) {
 
     }
+
+    console.log("test");
 }
 
 module.exports = TimeToText;
