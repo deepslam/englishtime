@@ -13,7 +13,7 @@ const defaultConfig = {
   numbers_to_text: false
 };
 
-const TimeToText = function(time, config = {}) {
+const TimeToText = function(time, cfg = {}) {
     let parsedTime = time.split(':');
     let result = '';
     let hour = null;
@@ -22,6 +22,7 @@ const TimeToText = function(time, config = {}) {
     let minuteText = '';
     let evening = false;
     let stopAdditions = false;
+    const config = Object.assign(defaultConfig, cfg);
 
     if (
         typeof parsedTime[0] != "undefined" &&
@@ -97,10 +98,12 @@ const TimeToText = function(time, config = {}) {
             }
         }
 
-        if (evening) {
-            result = result + ' in the evening';
-        } else {
-            result = result + ' in the morning';
+        if (config.print_daytime) {
+            if (evening) {
+                result = result + ' in the evening';
+            } else {
+                result = result + ' in the morning';
+            }
         }
     }
 

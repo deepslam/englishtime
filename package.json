@@ -4,7 +4,7 @@
   "description": "JS script which can transform English time in the text.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha -r chai/register-should"
   },
   "repository": {
     "type": "git",
