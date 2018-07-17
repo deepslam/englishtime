@@ -18,11 +18,10 @@ const TimeToText = function(time, cfg = {}) {
     let result = '';
     let hour = null;
     let minute = null;
-    let hourText = '';
-    let minuteText = '';
+    let originalMinute = null;
     let evening = false;
     let stopAdditions = false;
-    const config = Object.assign(defaultConfig, cfg);
+    let config = Object.assign(Object.assign({},defaultConfig), cfg);
 
     if (
         typeof parsedTime[0] != "undefined" &&
@@ -37,7 +36,7 @@ const TimeToText = function(time, cfg = {}) {
         parsedTime[1] >= 0 &&
         parsedTime[1] <= 59
     ) {
-        minute = parseInt(parsedTime[1]);
+        originalMinute = minute = parseInt(parsedTime[1]);
     }
 
     if (minute == null || hour == null) {
@@ -49,16 +48,22 @@ const TimeToText = function(time, cfg = {}) {
         hour = hour - 12;
     }
 
-    hourText = hour;
-    minuteText = minute;
+    if (minute >30) {
+        hour = hour + 1;
+        minute = 60 - minute;
+    }
+
+    let hourText = hour;
+    let minuteText = minute;
+
     if (config.numbers_to_text) {
         hourText = NumberToText.convertToText(hour);
         minuteText = NumberToText.convertToText(minute);
     }
 
 
-    if (minute %5 == 0 && minute != 0) {
-        switch (minute) {
+    if (originalMinute %5 == 0 && originalMinute != 0) {
+        switch (originalMinute) {
             case 15:
             case 45:
                     result = 'quarter';
@@ -70,7 +75,7 @@ const TimeToText = function(time, cfg = {}) {
                     result = minuteText;
                 break
         }
-    } else if (minute  > 0 && minute < 59) {
+    } else if (originalMinute  > 0 && originalMinute < 59) {
         result = minuteText;
     } else if (minute == 0) {
         switch (hour) {
@@ -90,8 +95,8 @@ const TimeToText = function(time, cfg = {}) {
     }
 
     if (!stopAdditions) {
-        if (minute != 0) {
-            if (minute < 30) {
+        if (originalMinute != 0) {
+            if (originalMinute <= 30) {
                 result = result + ' past ' + hourText;
             } else {
                 result = result + ' to ' + hourText;
