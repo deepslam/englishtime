@@ -1,10 +1,10 @@
 {
   "name": "englishtime",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JS script which can transform English time in the text.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/deepslam/englishtime#readme",
   "dependencies": {
-    "number-to-text": "^0.3.4"
+    "lodash.capitalize": "^4.2.1",
+    "number-to-text": "^0.3.4",
+    "plural": "^1.1.0"
   },
   "devDependencies": {
-    "chai": "*",
-    "mocha": "*"
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
   }
 }
