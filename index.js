@@ -17,6 +17,7 @@ const TimeToText = function(time, cfg = {}) {
     let parsedTime = time.split(':');
     let result = '';
     let hour = null;
+    let originalHour = null;
     let minute = null;
     let originalMinute = null;
     let evening = false;
@@ -28,7 +29,7 @@ const TimeToText = function(time, cfg = {}) {
         parsedTime[0] >= 0 &&
         parsedTime[0] <=23
     ) {
-        hour = parseInt(parsedTime[0]);
+        originalHour = hour = parseInt(parsedTime[0]);
     }
 
     if (
@@ -75,7 +76,7 @@ const TimeToText = function(time, cfg = {}) {
                     result = minuteText;
                 break
         }
-    } else if (originalMinute  > 0 && originalMinute < 59) {
+    } else if (originalMinute  > 0 && originalMinute <= 59) {
         result = minuteText;
     } else if (minute == 0) {
         switch (hour) {
